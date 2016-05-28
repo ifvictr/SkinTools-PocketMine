@@ -1,0 +1,17 @@
+name: SkinTools
+main: skintools\SkinTools
+version: 1.2.0
+api: 1.12.0
+load: POSTWORLD
+author: Gamecrafter
+description: Skins have never been this fun to mess around with!
+website: https://github.com/Viperize/SkinTools-PocketMine
+permissions:
+ skintools:
+  default: op
+  children:
+   skintools.command:
+    default: op
+    children:
+     skintools.command.skintools:
+      default: op
