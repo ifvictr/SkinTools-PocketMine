@@ -7,7 +7,7 @@ use pocketmine\Player;
 use skintools\command\SkinToolsCommand;
 use skintools\event\player\PlayerToggleTouchEvent;
 use skintools\event\SkinToolsListener;
-use skintools\utils\SkinConverter;
+use skintools\utils\Utils;
 
 class SkinTools extends PluginBase{
     const NONE = 0;
@@ -37,7 +37,7 @@ class SkinTools extends PluginBase{
      * @param Player $player2
      */
     public function setStolenSkin(Player $player1, Player $player2){
-    	$player1->setSkin($player2->getSkinData());
+    	$player1->setSkin($player2->getSkinData(), $player2->getSkinName());
     }
     /**
      * @param Player $player
@@ -79,14 +79,14 @@ class SkinTools extends PluginBase{
      * @param Player $player 
      */
     public function storeSkinData(Player $player){
-        $this->skinData[strtolower($player->getName())] = SkinConverter::compress($player->getSkinData());
+        $this->skinData[strtolower($player->getName())] = Utils::compress($player->getSkinData());
     }
     /**
      * @param Player $player
      * @return string
      */
     public function retrieveSkinData(Player $player){
-        return SkinConverter::decompress($this->skinData[strtolower($player->getName())]);
+        return Utils::decompress($this->skinData[strtolower($player->getName())]);
     }
     /** 
      * @param Player $player 

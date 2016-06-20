@@ -38,7 +38,7 @@ class SkinToolsListener implements Listener{
                     case SkinTools::STEAL:
                         $event->setCancelled(true);
                         $this->plugin->setStolenSkin($damager, $entity);
-                        $event->getDamager()->sendMessage(TextFormat::GREEN."You got ".$entity->getName()."'s skin.");
+                        $damager->sendMessage(TextFormat::GREEN."You got ".$entity->getName()."'s skin.");
                         break;
                 }
             }

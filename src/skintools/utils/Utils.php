@@ -5,7 +5,7 @@ namespace skintools\utils;
 use pocketmine\entity\Human;
 use skintools\SkinTools;
 
-class SkinConverter{
+class Utils{
     /**
      * Converts a human's skin to slim(32x64) if $slim is true, if $slim is false it will convert to non-slim(64x64)
      * @param Human $human

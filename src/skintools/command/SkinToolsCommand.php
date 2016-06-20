@@ -6,7 +6,7 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\utils\TextFormat;
 use pocketmine\Player;
-use skintools\utils\SkinConverter;
+use skintools\utils\Utils;
 use skintools\SkinTools;
 
 class SkinToolsCommand extends Command{
@@ -35,7 +35,7 @@ class SkinToolsCommand extends Command{
         ];
         $sender->sendMessage("SkinTools commands:");
         foreach($commands as $name => $description){
-            $sender->sendMessage("/skintools ".$name.": ".$description);
+            $sender->sendMessage("/skintools $name: $description");
         }
     }
     /**
@@ -53,7 +53,7 @@ class SkinToolsCommand extends Command{
                 case "file":
                     if(isset($args[1])){
                         if($player = $sender->getServer()->getPlayer($args[1])){
-                            SkinConverter::toFile($player);
+                            Utils::toFile($player);
                             $sender->sendMessage(TextFormat::GREEN."Saved ".$player->getName()."'s skin as a data file.");
                         }
                         else{
@@ -63,14 +63,14 @@ class SkinToolsCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a valid player.");
                     }
-                    return true;
+                    break;
                 case "help":
                     $this->sendCommandHelp($sender);
-                    return true;
+                    break;
                 /*
                 case "image":
                     //TODO: Fully implement command
-                    return true;
+                    break;
                  */
                 case "morph":
                     if($sender instanceof Player){
@@ -90,7 +90,7 @@ class SkinToolsCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please run this command in-game.");
                     }
-                    return true;
+                    break;
                 case "restore":
                     if($sender instanceof Player){
                         $sender->setSkin($this->plugin->retrieveSkinData($sender));
@@ -99,7 +99,7 @@ class SkinToolsCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please run this command in-game.");
                     }
-                    return true;
+                    break;
                 /*
                 case "swap":
                     if($sender instanceof Player){
@@ -108,7 +108,7 @@ class SkinToolsCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please run this command in-game.");
                     }
-                    return true;
+                    break;
                  */
                 case "touch":
                     if($sender instanceof Player){
@@ -133,7 +133,7 @@ class SkinToolsCommand extends Command{
                                     $sender->sendMessage(TextFormat::GREEN."Skin touch mode set to STEAL.");
                                     break;
                                 default:
-                                    $sender->sendMessage(TextFormat::RED."\"".$args[1]."\" is not a valid touch mode.");
+                                    $sender->sendMessage(TextFormat::RED."$args[1] is not a valid touch mode.");
                                     break;
                             }
                         }
@@ -144,7 +144,7 @@ class SkinToolsCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please run this command in-game.");
                     }
-                    return true;
+                    break;
                 default:
                     $sender->sendMessage("Usage: /skintools <sub-command> [parameters]");
                     return false;
@@ -154,5 +154,6 @@ class SkinToolsCommand extends Command{
             $this->sendCommandHelp($sender);
             return false;
         }
+        return true;
     }
 }
