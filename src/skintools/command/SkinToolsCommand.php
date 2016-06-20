@@ -147,7 +147,7 @@ class SkinToolsCommand extends Command{
                     break;
                 default:
                     $sender->sendMessage("Usage: /skintools <sub-command> [parameters]");
-                    return false;
+                    break;
             }
         }
         else{
